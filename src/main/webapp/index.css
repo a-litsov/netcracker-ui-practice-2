@@ -1,0 +1,90 @@
+body {
+    background: url(http://www.toptal.com/designers/subtlepatterns/patterns/grid.png);
+}
+
+div.outer {
+    display: table;
+    position: absolute;
+    height: 99%;
+    width: 99%;
+}
+
+div.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+div.inner {
+    background: url(http://www.toptal.com/designers/subtlepatterns/patterns/light_noise_diagonal.png);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 570px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, .2);
+    border-top: 1px solid rgba(255, 255, 255, .7);
+    margin-bottom: 10px;
+    padding: 5px 0;
+    font: 100% serif;
+}
+
+input[type=number]{
+    width: 100px;
+}
+
+#find-btn {
+    margin-left: 20px;
+}
+
+#current-roots-panel {
+    display: none;
+}
+
+#history-table-div {
+    display: none;
+}
+
+span.root {
+    margin: 0 15%;
+    /*text-decoration: underline;*/
+    font-weight: bold;
+    color: green;
+
+}
+
+.title {
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 110%;
+}
+
+.block {
+
+}
+
+table {
+    margin: auto;
+    width: 90%;
+}
+
+table, th, td {
+    border: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #999999;
+    color: white;
+}
+
+tr {
+    background-color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ffffe6;
+}

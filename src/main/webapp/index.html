@@ -3,48 +3,40 @@
 <head>
     <title>Quadratic polynomial's root finder</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+    <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
-    <fieldset>
-        <legend>Polynomial info</legend>
-        <input type="number" placeholder="1.0" step="any" min="0" max="10" id="a" value="0" maxlength="10" size="10" /> <label for="a">x<sup>2</sup></label> +
-        <input type="text" id="b" value="0" maxlength="10" size="10" /> <label for="b">x</label> +
-        <input type="text" id="c" value="0" maxlength="10" size="10" /> = 0
-        <button>Find roots!</button>
-    </fieldset>
-    <fieldset>
-        <legend>Roots</legend>
-        <span class="root">value1</span>
-        <span class="root">value2</span>
-    </fieldset>
+<div class="outer">
+    <div class="middle">
+        <div class="inner">
+            <div class="title">Polynomial info</div>
+            <input type="number" placeholder="1.0" step="any" min="0" max="10" id="a-coef" value="0"/>
+            <label for="a-coef">x<sup>2</sup></label> +
+            <input type="number" placeholder="1.0" step="any" min="0" max="10" id="b-coef" value="0" maxlength="10"
+                   size="10"/> <label for="b-coef">x</label> +
+            <input type="number" placeholder="1.0" step="any" min="0" max="10" id="c-coef" value="0" maxlength="10"
+                   size="10"/> = 0
+            <button id="find-btn" onclick="findRoots()">Find roots!</button>
+        </div>
 
-    <fieldset>
-        <legend>History of calculations</legend>
-        <table>
-            <tr>
-                <th>A</th>
-                <th>B</th>
-                <th>C</th>
-                <th>Root</th>
-                <th>Root</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>2</td>
-                <td>2</td>
-                <td>2</td>
-            </tr>
-        </table>
-    </fieldset>
+        <div class="inner" id="current-roots-panel">
+            <div class="title">Roots</div>
+        </div>
 
+        <div class="inner" id="history-table-div">
+            <div class="title">Calculations history</div>
+            <table id="history-table">
+                <tr>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>Root</th>
+                    <th>Root</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>
