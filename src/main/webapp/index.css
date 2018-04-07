@@ -34,7 +34,7 @@ div.block {
     border-top: 1px solid rgba(255, 255, 255, .7);
 }
 
-input[type=number]{
+input.coef {
     width: 100px;
 }
 
@@ -64,29 +64,33 @@ span.root {
 
 }
 
-table {
+#history-table {
     margin: auto;
     width: 90%;
 }
 
-table, th, td {
-    border: 1px solid lightgray;
+#history-table {
     border-collapse: collapse;
+    border-radius: 5px;
 }
 
-th {
+#history-table th, td {
+    border: 1px solid lightgray;
+}
+
+#history-table th {
     background-color: #999999;
     color: white;
 }
 
-tr {
+#history-table tr {
     background-color: white;
 }
 
-tr:nth-child(odd) {
+#history-table tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
 
-tr:hover {
+#history-table tr:hover {
     background-color: #ffffe6;
 }
