@@ -4,4 +4,15 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-class>com.edu_netcracker.nn.adlitsov.ui.homework2.MainServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>MainServlet</servlet-name>
+    <url-pattern>/quadratic-equations-solver</url-pattern>
+  </servlet-mapping>
+
 </web-app>
