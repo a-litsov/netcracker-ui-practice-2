@@ -1,42 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Quadratic polynomial's root finder</title>
+    <title>Quadratic polynomials root finder</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="index.css"/>
+    <link rel="stylesheet" type="text/css" href="index.css" />
     <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
-<div class="outer">
-    <div class="middle">
-        <div class="inner">
-            <div class="title">Polynomial info</div>
-            <input type="number" placeholder="1.0" step="any" min="0" max="10" id="a-coef" value="0"/>
-            <label for="a-coef">x<sup>2</sup></label> +
-            <input type="number" placeholder="1.0" step="any" min="0" max="10" id="b-coef" value="0" maxlength="10"
-                   size="10"/> <label for="b-coef">x</label> +
-            <input type="number" placeholder="1.0" step="any" min="0" max="10" id="c-coef" value="0" maxlength="10"
-                   size="10"/> = 0
-            <button id="find-btn" onclick="findRoots()">Find roots!</button>
-        </div>
+<div class="page-title title">Quadratic polynomials root finder</div>
+<div class="block">
+    <div class="block-title title">Polynomial</div>
+    <input type="number" value="1.0" step="any" id="a-coef" class="coef" oninput="checkInput()" />
+    <label for="a-coef">x<sup>2</sup></label> +
+    <input type="number" value="1.0" step="any" id="b-coef" class="coef" oninput="checkInput()" />
+    <label for="b-coef">x</label> +
+    <input type="number" value="1.0" step="any" id="c-coef" class="coef" oninput="checkInput()" /> = 0
+    <button id="find-btn" onclick="findRoots()">Find roots!</button>
+</div>
 
-        <div class="inner" id="current-roots-panel">
-            <div class="title">Roots</div>
-        </div>
+<div class="block" id="current-roots-panel">
+    <div class="block-title title">Roots</div>
+</div>
 
-        <div class="inner" id="history-table-div">
-            <div class="title">Calculations history</div>
-            <table id="history-table">
-                <tr>
-                    <th>A</th>
-                    <th>B</th>
-                    <th>C</th>
-                    <th>Root</th>
-                    <th>Root</th>
-                </tr>
-            </table>
-        </div>
-    </div>
+<div class="block" id="history-table-div">
+    <div class="block-title title">Calculations history</div>
+    <table id="history-table">
+        <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>Root<sub>1</sub></th>
+            <th>Root<sub>2</sub></th>
+        </tr>
+    </table>
 </div>
 </body>
 </html>
