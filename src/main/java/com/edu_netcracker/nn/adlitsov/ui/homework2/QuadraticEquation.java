@@ -30,11 +30,15 @@ public class QuadraticEquation {
 
     @JsonIgnore
     public Solution getSolution() {
-        if (a == 0 && b == 0) {
-            if (c == 0) {
-                return new Solution(Status.ALL_REAL_NUMBERS, null);
+        if (a == 0) {
+            if (b == 0) {
+                if (c == 0) {
+                    return new Solution(Status.ALL_REAL_NUMBERS, null);
+                } else {
+                    return new Solution(Status.NO_ROOTS_IN_REAL_NUMBERS, null);
+                }
             } else {
-                return new Solution(Status.NO_ROOTS_IN_REAL_NUMBERS, null);
+                return new Solution(Status.HAS_ROOTS, new double[]{-c / b});
             }
         }
         double discr = Math.pow(b, 2) - 4 * a * c;
