@@ -2,11 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.edu_netcracker.nn.adlitsov.ui</groupId>
-    <artifactId>practice-2</artifactId>
+    <artifactId>ui-practice-2</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>practice-2 Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+    <name>ui-practice-2</name>
 
 
     <properties>
@@ -21,7 +20,7 @@
 
 
     <build>
-        <finalName>practice-2</finalName>
+        <finalName>ui-practice-2</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -37,7 +36,7 @@
                 <version>${tomcat7-maven-plugin.version}</version>
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
-                    <server>NetCrackerUIPractice2Server</server>
+                    <server>MyTomcatServer</server>
                     <path>/ui-practice-2</path>
                 </configuration>
             </plugin>
