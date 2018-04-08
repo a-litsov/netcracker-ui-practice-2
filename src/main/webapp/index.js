@@ -1,25 +1,26 @@
+var allNumbersTitle = "True for all real numbers";
+var noRootsTitle = "There are no solutions in real numbers";
+var precision = 2;
+
 // call it also before ajax query!
 function checkInput() {
     var isValid = true;
-    var fields = document.getElementsByClassName("coef");
-    Array.from(fields).forEach(function(field) {
+    forEachCoefField(function(field) {
         isValid = isValid && field.validity.valid;
     });
-
     document.getElementById("find-btn").disabled = !isValid;
-    return isValid
 }
 
 function showRootsPanel(rootsPanel) {
     rootsPanel.style.display = "block";
 }
 
-function showTable() {
+function showHistTableDiv() {
     var tablePanel = document.getElementById("history-table-div");
     tablePanel.style.display = "block";
 }
 
-function hideTable() {
+function hideHistTableDiv() {
     var tablePanel = document.getElementById("history-table-div");
     tablePanel.style.display = "none";
 }
@@ -34,18 +35,18 @@ function removeRootLabels(rootsPanel) {
 function addRootLabel(rootsPanel, root) {
     var rootLabel = document.createElement("span");
     rootLabel.className = "root";
-    rootLabel.innerHTML = root;//'True for all real numbers';//'There are no solutions in real numbers';
+    rootLabel.innerHTML = root;
     rootsPanel.appendChild(rootLabel);
 }
 
 function remakeRootsPanel(rootsPanel, solution) {
     removeRootLabels(rootsPanel);
     var status = solution.status;
-    if (status == "ALL_REAL_NUMBERS") {
-        addRootLabel(rootsPanel, "True for all real numbers");
+    if (status === "ALL_REAL_NUMBERS") {
+        addRootLabel(rootsPanel, allNumbersTitle);
     } else {
-        if (status == "NO_ROOTS_IN_REAL_NUMBERS") {
-            addRootLabel(rootsPanel, "There are no solutions in real numbers");
+        if (status === "NO_ROOTS_IN_REAL_NUMBERS") {
+            addRootLabel(rootsPanel, noRootsTitle);
         } else {
             for (i = 0; i < solution.roots.length; i++) {
                 addRootLabel(rootsPanel, solution.roots[i]);
@@ -54,90 +55,80 @@ function remakeRootsPanel(rootsPanel, solution) {
     }
 }
 
-function getCoeffs() {
-    var coeffs = [];
-    var fields = document.getElementsByClassName("coef");
-    Array.from(fields).forEach(function(c) {
-        coeffs.push(parseFloat(c.value));
-    });
-    return coeffs;
-}
-
-function removeRow(row) {
+function removeHistTableRow(row) {
     var table = row.parentNode;
     table.removeChild(row);
 }
 
-function addRow(table, coeffs, solution) {
+function addHistTableRow(table, solution) {
     var row = table.insertRow(1);
-    for (var i = 0; i < coeffs.length; i++) {
-        var cell = row.insertCell(i);
-        cell.innerHTML = coeffs[i];
-    }
-    // cell.colSpan = 2;
-    var status = solution.status;
-    if (status == "ALL_REAL_NUMBERS") {
-        cell = row.insertCell(3);
-        cell.innerHTML = "True for all real numbers";
+    var cell;
+    forEachCoefField(function(field) {
+        cell = row.insertCell(-1);
+        cell.innerHTML = parseFloat(field.value).toFixed(precision);
+    });
+
+    if (solution.status !== "TWO_ROOTS") {
+        cell = row.insertCell(-1);
         cell.colSpan = 2;
+        switch (solution.status) {
+            case "ALL_REAL_NUMBERS":
+                cell.innerHTML = "True for all real numbers";
+                break;
+            case "NO_ROOTS_IN_REAL_NUMBERS":
+                cell.innerHTML = "There are no solutions in real numbers";
+                break;
+            case "SINGLE_ROOT":
+                cell.innerHTML = solution.roots[0].toPrecision(precision);
+                break;
+        }
     } else {
-        if (status == "NO_ROOTS_IN_REAL_NUMBERS") {
-            cell = row.insertCell(3);
-            cell.innerHTML = "There are no solutions in real numbers";
-            cell.colSpan = 2;
-        } else {
-            var colspan = 1;
-            if (solution.roots.length == 1) {
-                colspan = 2;
-            }
-            for (i = 0; i < solution.roots.length; i++) {
-                cell = row.insertCell(3 + i);
-                cell.innerHTML = solution.roots[i];
-                cell.colSpan = colspan;
-            }
+        for (i = 0; i < 2; i++) {
+            cell = row.insertCell(-1);
+            cell.innerHTML = solution.roots[i].toPrecision(precision);
         }
     }
 
     row.onclick = function() {
-        if (table.rows.length == 2) {
-            hideTable();
+        if (table.rows.length === 2) {
+            hideHistTableDiv();
         }
-        removeRow(row);
+        removeHistTableRow(row);
     };
 }
 
-function getCoeffsObj() {
-    var obj = {};
+function getCoeffs() {
+    var coeffs = {};
+    forEachCoefField(function(field) {
+        coeffs[field.id.charAt(0)] = parseFloat(field.value).toFixed(precision);
+    });
+    return coeffs;
+}
+
+function forEachCoefField(action) {
     var fields = document.getElementsByClassName("coef");
-    obj.a = fields[0].value;
-    obj.b = fields[1].value;
-    obj.c = fields[2].value;
-    return obj;
+    Array.from(fields).forEach(action);
 }
 
 
 function findRoots() {
-    // send ajax request
+    var historyTable = document.getElementById("history-table");
+    var rootsPanel = document.getElementById("current-roots-panel");
+
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var params = JSON.stringify(getCoeffsObj());
-    console.log(params);
-    var url = "http://localhost:8080/ui-practice-2/quadratic-equations-solver";
+    var url = window.location.href + "/quadratic-equations-solver";
     xhr.open('POST', url);
     xhr.onreadystatechange = function() {
-        if (xhr.readyState>3 && xhr.status==200) {
-            var solution =  JSON.parse(xhr.responseText);//[1.0625, 2.2378];
+        if (xhr.readyState>3 && xhr.status === 200) {
+            var solution =  JSON.parse(xhr.responseText);
 
-            var rootsPanel = document.getElementById("current-roots-panel");
             remakeRootsPanel(rootsPanel, solution);
             showRootsPanel(rootsPanel);
 
-            var coeffs = getCoeffs();
-            var table = document.getElementById("history-table");
-            addRow(table, coeffs, solution);
-
-            showTable();
+            addHistTableRow(historyTable, solution);
+            showHistTableDiv();
         }
     };
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("coeffs=" + params);
+    xhr.send("coeffs=" + JSON.stringify(getCoeffs()));
 }
