@@ -3,18 +3,19 @@
 <head>
     <title>Quadratic polynomials root finder</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="index.css"/>
     <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
 <div class="page-title title">Quadratic polynomials root finder</div>
 <div class="block">
     <div class="block-title title">Polynomial</div>
-    <input type="number" value="1.0" step="any" id="a-coef" class="coef" oninput="checkInput()" />
-    <label for="a-coef">x<sup>2</sup></label> +
-    <input type="number" value="1.0" step="any" id="b-coef" class="coef" oninput="checkInput()" />
-    <label for="b-coef">x</label> +
-    <input type="number" value="1.0" step="any" id="c-coef" class="coef" oninput="checkInput()" /> = 0
+    <input type="number" value="1.0" max="1e6" min="-1e6" step="any" id="a-coeff" class="coeff" oninput="checkInput()"/>
+    <label for="a-coeff">x<sup>2</sup></label> +
+    <input type="number" value="1.0" max="1e6" min="-1e6" step="any" id="b-coeff" class="coeff" oninput="checkInput()"/>
+    <label for="b-coeff">x</label> +
+    <input type="number" value="1.0" max="1e6" min="-1e6" step="any" id="c-coeff" class="coeff" oninput="checkInput()"/>
+    <label for="c-coeff"> = 0</label>
     <button id="find-btn" onclick="findRoots()">Find roots!</button>
 </div>
 

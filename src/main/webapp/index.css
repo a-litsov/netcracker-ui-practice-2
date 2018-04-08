@@ -5,7 +5,6 @@ body {
 }
 
 div.page-title {
-    text-align: center;
     margin: 20px 0;
     font-size: 175%;
     text-shadow: 0 1px 0 white;
@@ -34,7 +33,7 @@ div.block {
     border-top: 1px solid rgba(255, 255, 255, .7);
 }
 
-input.coef {
+input.coeff {
     width: 100px;
 }
 
@@ -52,23 +51,22 @@ input:invalid {
     display: none;
 }
 
-#history-table-div {
-    display: none;
-}
-
 span.root {
-    margin: 0 10%;
+    display: inline-block;
+    width: 50%;
     font-weight: bold;
+    font-size: 105%;
     color: green;
 
+}
+
+#history-table-div {
+    display: none;
 }
 
 #history-table {
     margin: auto;
     width: 90%;
-}
-
-#history-table {
     border-collapse: collapse;
     border-radius: 5px;
 }
@@ -80,6 +78,10 @@ span.root {
 #history-table th {
     background-color: #999999;
     color: white;
+}
+
+#history-table td {
+    text-align: right;
 }
 
 #history-table tr {
