@@ -57,8 +57,7 @@ input:invalid {
 }
 
 span.root {
-    margin: 0 15%;
-    /*text-decoration: underline;*/
+    margin: 0 10%;
     font-weight: bold;
     color: green;
 
